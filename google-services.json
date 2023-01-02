@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1050934168675",
+    "project_id": "app-financiera-62895",
+    "storage_bucket": "app-financiera-62895.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050934168675:android:cde0c733b52183a61b7c56",
+        "android_client_info": {
+          "package_name": "com.App.Financiera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050934168675-c48ureagoj6090udo0sprtqfn350bb64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHylxS0UMUFST9yYeRc40BN52Ce-JnbZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050934168675-c48ureagoj6090udo0sprtqfn350bb64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
