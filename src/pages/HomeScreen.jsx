@@ -11,30 +11,15 @@ import Constants from "expo-constants";
 import Estado from "../components/Estado";
 import Addsome from "../components/Addsome";
 import ModalDelete from "../components/ModalDelete";
-import ModalAdd from "../components/ModalAdd";
+import AddGasto from "./AddGasto";
 import { UseContext } from "../context/UseContext";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import UseFireBase from "../data/firebaseConfig";
 import { verticalScale } from "../themes/Metrics";
 
 export default function HomeScreen() {
-  const {
-    modalDelete,
-    modalAdd,
-    refresh,
-    totalGanancias,
-    setTotalGanancias,
-    totalGastos,
-    setTotalGastos,
-    userID,
-  } = React.useContext(UseContext);
+  const { modalDelete, refresh, setTotalGanancias, setTotalGastos, userID } =
+    React.useContext(UseContext);
 
   const [loading, setLoading] = React.useState(true);
   const [data, setData] = React.useState([]);
@@ -63,6 +48,8 @@ export default function HomeScreen() {
           descripcion: doc.data().descripcion,
           tipo: doc.data().tipo,
           fecha: doc.data().fecha,
+          cuenta: doc.data().cuenta,
+          nombre_cuenta: doc.data().nombre_cuenta,
         });
 
         if (doc.data().tipo === "Ganancia") {
@@ -97,9 +84,8 @@ export default function HomeScreen() {
           />
         </View>
       </View>
-      {(modalDelete || modalAdd) && <View style={styles.tapadera}></View>}
+      {modalDelete && <View style={styles.tapadera}></View>}
       {modalDelete && <ModalDelete />}
-      {modalAdd && <ModalAdd />}
     </View>
   );
 }

@@ -12,13 +12,14 @@ import {
   verticalScale,
 } from "../themes/Metrics";
 import { UseContext } from "../context/UseContext";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Addsome() {
-  const { modalAdd, setModalAdd } = React.useContext(UseContext);
+  const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        setModalAdd(!modalAdd);
+        navigation.navigate("addSome");
       }}
     >
       <View style={styles.box}>

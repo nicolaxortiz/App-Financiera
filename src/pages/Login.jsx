@@ -15,32 +15,35 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setUserID(uid);
+        setRefresh(!refresh);
+        navigation.navigate("Home");
+      } else {
+      }
+    });
+  }, []);
 
   const { userID, setUserID, refresh, setRefresh } =
     React.useContext(UseContext);
 
   const navigation = useNavigation();
+  const { auth } = UseFireBase();
 
   const btnLogin = (login) => {
-    const { auth } = UseFireBase();
     const { email, password } = login;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         navigation.navigate("Home");
-
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            const uid = user.uid;
-            setUserID(uid);
-            setRefresh(!refresh);
-          } else {
-          }
-        });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        setError("*Tus datos son incorrectos!*");
       });
   };
 
@@ -67,7 +70,7 @@ export default function Login() {
         }}
         secureTextEntry={true}
       />
-
+      {!!error.length && <Text style={styles.txtError}>{error}</Text>}
       <Pressable
         style={styles.press}
         onPress={() => {
@@ -108,5 +111,12 @@ const styles = StyleSheet.create({
     marginHorizontal: horizontalScale(15),
     alignSelf: "center",
     marginTop: verticalScale(25),
+  },
+
+  txtError: {
+    alignSelf: "center",
+    marginTop: verticalScale(25),
+    fontSize: moderateScale(16),
+    color: "#F05C5C",
   },
 });

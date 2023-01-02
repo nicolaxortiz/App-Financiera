@@ -69,7 +69,7 @@ export default function Estado() {
       </View>
 
       <Image
-        source={{ uri: "https://i.imgur.com/H87RNaW.png" }}
+        source={{ uri: "https://i.imgur.com/xHXs04p.png" }}
         style={styles.imgLogo}
       ></Image>
     </View>
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   imgLogo: {
     width: horizontalScale(160),
     height: verticalScale(160),
+    resizeMode: "contain",
   },
 
   titulo: {

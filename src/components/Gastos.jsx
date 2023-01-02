@@ -43,7 +43,12 @@ export default function Gastos({ item }) {
           </View>
 
           <Text style={styles.txtDescripcion}>{item.descripcion}</Text>
-          <Text style={styles.txtGasto}>{item.tipo}</Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.txtGasto}>{item.tipo}</Text>
+            <Text style={styles.txtCuenta}>Cuenta: {item.nombre_cuenta}</Text>
+          </View>
         </View>
       </TouchableHighlight>
     </View>
@@ -81,6 +86,12 @@ const styles = StyleSheet.create({
   txtGasto: {
     fontSize: moderateScale(12),
     marginHorizontal: horizontalScale(15),
+  },
+
+  txtCuenta: {
+    fontSize: moderateScale(12),
+    marginRight: horizontalScale(10),
+    color: "#606060",
   },
 
   img: {
