@@ -8,6 +8,8 @@ const UseMeStates = () => {
   const [totalGastos, setTotalGastos] = React.useState(0);
   const [userID, setUserID] = React.useState("");
   const [selectedCuenta, setSelectedCuenta] = React.useState({});
+  const [data, setData] = React.useState([]);
+  const [search, setSearch] = React.useState("");
   return {
     modalDelete,
     setModalDelete,
@@ -23,6 +25,10 @@ const UseMeStates = () => {
     setUserID,
     selectedCuenta,
     setSelectedCuenta,
+    search,
+    setSearch,
+    data,
+    setData,
   };
 };
 

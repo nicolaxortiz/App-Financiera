@@ -15,22 +15,19 @@ import { UseContext } from "../context/UseContext";
 import { doc, deleteDoc } from "firebase/firestore";
 import UseFireBase from "../data/firebaseConfig";
 
-export default function ModalDelete() {
-  const {
-    setModalDelete,
-    modalDelete,
-    selectedItem,
-    setSelectedItem,
-    refresh,
-    setRefresh,
-  } = React.useContext(UseContext);
+export default function DeleteCuenta({ cuenta }) {
+  const { setModalDelete, modalDelete, refresh, setRefresh } =
+    React.useContext(UseContext);
 
   const deleteData = async () => {
-    const { db } = UseFireBase();
-    await deleteDoc(doc(db, "Movimientos", selectedItem));
-    setModalDelete(!modalDelete);
-    setRefresh(!refresh);
-    setSelectedItem("");
+    if (cuenta.nombre == "General") {
+      setModalDelete(!modalDelete);
+    } else {
+      const { db } = UseFireBase();
+      await deleteDoc(doc(db, "Cuentas", cuenta.id));
+      setModalDelete(!modalDelete);
+      setRefresh(!refresh);
+    }
   };
 
   return (
@@ -43,7 +40,7 @@ export default function ModalDelete() {
       }}
     >
       <View style={styles.box}>
-        <Text style={styles.Titulo}>¿Desea eliminar este item?</Text>
+        <Text style={styles.Titulo}>¿Desea eliminar esta cuenta?</Text>
         <View style={styles.botones}>
           <Pressable
             style={styles.press2}

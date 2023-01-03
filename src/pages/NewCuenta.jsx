@@ -10,7 +10,7 @@ import { collection, addDoc } from "firebase/firestore";
 import UseFireBase from "../data/firebaseConfig";
 import { UseContext } from "../context/UseContext";
 
-export default function NewCuenta() {
+export default function NewCuenta({ route }) {
   const { userID, setRefresh, refresh } = React.useContext(UseContext);
   const navigation = useNavigation();
   const [cuenta, setCuenta] = React.useState({
@@ -23,7 +23,11 @@ export default function NewCuenta() {
     const { db } = UseFireBase();
     await addDoc(collection(db, "Cuentas"), cuenta);
     setRefresh(!refresh);
-    navigation.navigate("selectCuenta");
+    if (route.params.page == "SelectCuenta") {
+      navigation.navigate("selectCuenta");
+    } else {
+      navigation.navigate("miDinero");
+    }
   };
 
   return (
@@ -37,7 +41,6 @@ export default function NewCuenta() {
         <Text style={styles.txtInput}>Nombre:</Text>
         <TextInput
           style={styles.input}
-          keyboardType="numeric"
           placeholder="Ej: Ahorros"
           cursorColor="#CDE9FF"
           onChangeText={(text) => {
@@ -49,7 +52,11 @@ export default function NewCuenta() {
         <Pressable
           style={styles.press2}
           onPress={() => {
-            navigation.navigate("selectCuenta");
+            if (route.params.page == "SelectCuenta") {
+              navigation.navigate("selectCuenta");
+            } else {
+              navigation.navigate("miDinero");
+            }
           }}
         >
           <Text>Cancelar</Text>

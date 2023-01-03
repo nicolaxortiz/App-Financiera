@@ -82,7 +82,7 @@ export default function SelectCuenta() {
       <View>
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.navigate("newCuenta");
+            navigation.navigate("newCuenta", { page: "SelectCuenta" });
           }}
         >
           <View style={styles.btn}>

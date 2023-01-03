@@ -27,49 +27,45 @@ export default function Estado() {
   return (
     <View style={styles.banner}>
       <View>
+        <View style={{ alignItems: "center" }}>
+          <Text style={{ fontWeight: "bold", fontSize: moderateScale(18) }}>
+            Ganancias
+          </Text>
+          <Text style={{ fontSize: moderateScale(18) }}>
+            ${formatoNumber(totalGanancias)}
+          </Text>
+        </View>
+
+        <View style={{ alignItems: "center", marginTop: moderateScale(15) }}>
+          <Text style={{ fontWeight: "bold", fontSize: moderateScale(18) }}>
+            Gastos
+          </Text>
+          <Text style={{ fontSize: moderateScale(18) }}>
+            ${formatoNumber(totalGastos)}
+          </Text>
+        </View>
+
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate("miDinero")}
         >
-          <View style={{ alignItems: "center" }}>
-            <Text style={{ fontWeight: "bold", fontSize: moderateScale(18) }}>
-              Dinero actual
-            </Text>
-            <Text style={{ fontSize: moderateScale(18) }}>
-              ${formatoNumber(totalGanancias)}
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("miGasto")}
-        >
           <View style={{ alignItems: "center", marginTop: moderateScale(15) }}>
-            <Text style={{ fontWeight: "bold", fontSize: moderateScale(18) }}>
-              Gastos
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: moderateScale(18),
+              }}
+            >
+              Total
             </Text>
             <Text style={{ fontSize: moderateScale(18) }}>
-              ${formatoNumber(totalGastos)}
+              ${formatoNumber(totalGanancias - totalGastos)}
             </Text>
           </View>
         </TouchableWithoutFeedback>
-
-        <View style={{ alignItems: "center", marginTop: moderateScale(15) }}>
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: moderateScale(18),
-            }}
-          >
-            Total
-          </Text>
-          <Text style={{ fontSize: moderateScale(18) }}>
-            ${formatoNumber(totalGanancias - totalGastos)}
-          </Text>
-        </View>
       </View>
 
       <Image
-        source={{ uri: "https://i.imgur.com/xHXs04p.png" }}
+        source={{ uri: "https://i.imgur.com/0jl1zhN.png" }}
         style={styles.imgLogo}
       ></Image>
     </View>
@@ -78,8 +74,8 @@ export default function Estado() {
 
 const styles = StyleSheet.create({
   imgLogo: {
-    width: horizontalScale(160),
-    height: verticalScale(160),
+    width: horizontalScale(180),
+    height: verticalScale(180),
     resizeMode: "contain",
   },
 

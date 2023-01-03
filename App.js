@@ -11,6 +11,7 @@ import Login from "./src/pages/Login.jsx";
 import AddGasto from "./src/pages/AddGasto";
 import SelectCuenta from "./src/pages/SelectCuenta";
 import NewCuenta from "./src/pages/NewCuenta";
+import CuentaInfo from "./src/pages/CuentaInfo";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +36,7 @@ export default function App() {
             name="Login"
             component={Login}
             options={{
-              title: "Inicia Sesion",
+              title: "Bienvenidx a tu App Financiera",
             }}
           />
 
@@ -84,6 +85,14 @@ export default function App() {
             component={NewCuenta}
             options={{
               title: "Crea tu nueva cuenta",
+            }}
+          />
+
+          <Stack.Screen
+            name="cuentaInfo"
+            component={CuentaInfo}
+            options={{
+              title: "Movimientos de tu cuenta",
             }}
           />
         </Stack.Navigator>

@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Pressable, StyleSheet, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  TouchableHighlight,
+} from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {
   horizontalScale,
@@ -15,6 +22,7 @@ export default function AddGasto() {
   const { refresh, setRefresh, userID, selectedCuenta } =
     React.useContext(UseContext);
   const [valueNumber, setValueNumber] = React.useState();
+  const [error, setError] = React.useState(false);
 
   const navigation = useNavigation();
 
@@ -46,11 +54,15 @@ export default function AddGasto() {
   };
 
   const btnGuardar = async () => {
-    const { db } = UseFireBase();
-    await addDoc(collection(db, "Movimientos"), form);
-    console.log(form);
-    setRefresh(!refresh);
-    navigation.navigate("Home");
+    if (!(Object.entries(selectedCuenta).length === 0)) {
+      const { db } = UseFireBase();
+      await addDoc(collection(db, "Movimientos"), form);
+      setRefresh(!refresh);
+      setError(false);
+      navigation.navigate("Home");
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -133,6 +145,11 @@ export default function AddGasto() {
           />
         </View>
       </View>
+      {error && (
+        <Text style={styles.txtError}>
+          *Debes digitar la cuenta a la cual generar el monto*
+        </Text>
+      )}
       <View style={styles.botones}>
         <Pressable
           style={styles.press2}
@@ -143,14 +160,16 @@ export default function AddGasto() {
         >
           <Text>Cancelar</Text>
         </Pressable>
-        <Pressable
+        <TouchableHighlight
+          activeOpacity={1}
+          underlayColor="#BDD4E6"
           style={styles.press}
           onPress={() => {
             btnGuardar();
           }}
         >
           <Text>Guardar</Text>
-        </Pressable>
+        </TouchableHighlight>
       </View>
     </View>
   );
@@ -204,5 +223,12 @@ const styles = StyleSheet.create({
   txtInput: {
     fontSize: moderateScale(13),
     fontWeight: "bold",
+  },
+
+  txtError: {
+    alignSelf: "center",
+    marginTop: verticalScale(25),
+    fontSize: moderateScale(12),
+    color: "#F05C5C",
   },
 });

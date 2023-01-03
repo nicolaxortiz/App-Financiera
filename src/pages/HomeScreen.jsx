@@ -18,11 +18,16 @@ import UseFireBase from "../data/firebaseConfig";
 import { verticalScale } from "../themes/Metrics";
 
 export default function HomeScreen() {
-  const { modalDelete, refresh, setTotalGanancias, setTotalGastos, userID } =
-    React.useContext(UseContext);
-
-  const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState([]);
+  const {
+    modalDelete,
+    refresh,
+    setTotalGanancias,
+    setTotalGastos,
+    userID,
+    search,
+    data,
+    setData,
+  } = React.useContext(UseContext);
 
   let querySnapshot;
   let ArrayItems = [];
@@ -61,11 +66,17 @@ export default function HomeScreen() {
       setTotalGanancias(ganancias);
       setTotalGastos(gastos);
       setData(ArrayItems);
-      setLoading(false);
     };
 
     getData();
   }, [refresh]);
+
+  let searchArray;
+  if (search != "") {
+    searchArray = data.filter((item) => {
+      return item.descripcion.toLowerCase().includes(search.toLowerCase());
+    });
+  }
 
   const renderItem = ({ item }) => {
     return <Gastos key={item.id} item={item} />;
@@ -78,7 +89,7 @@ export default function HomeScreen() {
         <Addsome />
         <View style={{ flex: 1, marginVertical: verticalScale(15) }}>
           <FlatList
-            data={data}
+            data={search ? searchArray : data}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
           />
